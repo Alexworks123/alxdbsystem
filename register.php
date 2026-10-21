@@ -1,6 +1,6 @@
 <?php
-if (file_exists('db.php')) {
-    include 'db.php';
+if (file_exists('connection.php')) {
+    include 'connection.php';
 }
 
 $msg = "";
@@ -12,6 +12,13 @@ if (isset($_POST['register'])) {
     $stmt->bind_param("ss", $username, $password);
     
     $msg = $stmt->execute() ? "Registered successfully!" : "Registration failed!";
+    
+    if ($stmt->execute()) {
+    header("Location: login.php");
+    exit();
+} else {
+    echo "Registration failed!";
+}
 }
 ?>
 
